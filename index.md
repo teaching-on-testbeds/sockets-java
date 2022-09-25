@@ -259,6 +259,8 @@ java UDPClient
 
 On "romeo", type a line of text and hit Enter. You should see this line of text appear on "juliet"; then, "juliet" will send that line of text, but in uppercase, back to "romeo".
 
+You can use Ctrl+C to stop the server process on "juliet".
+
 ### Transfer data across TCP sockets
 
 Next, we will write a TCP server application on "juliet", and a TCP client application "romeo".  We will need a text editor on the remote host to write Java code.
@@ -286,7 +288,7 @@ class TCPServer {
 
 Now, we'll fill in code to
 
-* create a TCP socket. Note that this is a `ServerSocket` type.  We pass `null` to the constructor, indicating that the socket should not be bound yet.
+* create a TCP socket. Note that this is a `ServerSocket` type.  
 * specify the address and port to which we want to bind. Note that `10.10.0.101` is "juliet"'s own IP address, and 4000 is an available TCP port. (We could use *any* available TCP port!)
 * call the socket API function `bind` to reserve this address and port combination for our socket.
 
@@ -303,7 +305,7 @@ class TCPServer {
 
   String clientSentence;
   String capitalizedSentence;
-  ServerSocket welcomeSocket = new ServerSocket(null);
+  ServerSocket welcomeSocket = new ServerSocket();
   InetSocketAddress IPBindAddress = new InetSocketAddress("10.10.0.101", 4000);
   welcomeSocket.bind(IPBindAddress);
 
@@ -327,7 +329,7 @@ class TCPServer {
 
   String clientSentence;
   String capitalizedSentence;
-  ServerSocket welcomeSocket = new ServerSocket(null);
+  ServerSocket welcomeSocket = new ServerSocket();
   InetSocketAddress IPBindAddress = new InetSocketAddress("10.10.0.101", 4000);
   welcomeSocket.bind(IPBindAddress);
 
@@ -352,7 +354,7 @@ class TCPServer {
  public static void main(String argv[]) throws Exception {
   String clientSentence;
   String capitalizedSentence;
-  ServerSocket welcomeSocket = new ServerSocket(null);
+  ServerSocket welcomeSocket = new ServerSocket();
   InetSocketAddress IPBindAddress = new InetSocketAddress("10.10.0.101", 4000);
   welcomeSocket.bind(IPBindAddress);
 
@@ -364,7 +366,7 @@ class TCPServer {
    DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
    clientSentence = inFromClient.readLine();
    System.out.println("Received: " + clientSentence);
-   capitalizedSentence = clientSentence.toUpperCase() + 'n';
+   capitalizedSentence = clientSentence.toUpperCase() + '\n';
    outToClient.writeBytes(capitalizedSentence);
   }
  }
@@ -396,7 +398,7 @@ class TCPClient {
   DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
   BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
   sentence = inFromUser.readLine();
-  outToServer.writeBytes(sentence + 'n');
+  outToServer.writeBytes(sentence + '\n');
   modifiedSentence = inFromServer.readLine();
   System.out.println("FROM SERVER: " + modifiedSentence);
   clientSocket.close();
@@ -426,6 +428,8 @@ java TCPClient
 ```
 
 On "romeo", type a line of text and hit Enter. You should see this line of text appear on "juliet"; then, "juliet" will send that line of text, but in uppercase, back to "romeo".
+
+You can use Ctrl+C to stop the server process on "juliet".
 
 
 ## Exercise
