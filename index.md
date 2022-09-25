@@ -57,7 +57,7 @@ The client will then:
 
 1. Create a TCP socket.
 2. (Optional) The client may `bind` to the *local* IP address and TCP port. This is optional - if there is no explicit call to `bind`, the operating system will assign a random TCP port to this socket in the next step.
-3. Call `connect`, specifying the *destination* IP address and port. This instructs the TCP transport layer to execute the connection establishment process, which involved sending messages known as the "three-way handshake" between client and server.
+3. Call `connect`, specifying the *destination* IP address and port. This instructs the TCP transport layer to execute the connection establishment process, which involved sending messages known as the "three-way handshake" between client and server. (In Java, this will happen automatically when we create a `Socket` and specify the address of the remote endpoint.)
 
 Once connection establishment is complete, and the connection is ongoing, the client and server applications can use two more socket API calls to transfer data:
 
