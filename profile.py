@@ -19,12 +19,14 @@ request = pc.makeRequestRSpec()
 
 # Set up first host - romeo
 node_romeo = request.XenVM("romeo")
+node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
 node_romeo.addService(rspec.Execute(shell="bash", command="/usr/bin/sudo /usr/bin/apt update; /usr/bin/sudo /usr/bin/apt -y install pcmanfm openjdk-11-jre-headless openjdk-11-jdk-headless leafpad"))
 node_romeo.startVNC()
 node_romeo.routable_control_ip = True
 
 # Give romeo some friends
 node_juliet = request.XenVM("juliet")
+node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
 node_juliet.addService(rspec.Execute(shell="bash", command="/usr/bin/sudo /usr/bin/apt update; /usr/bin/sudo /usr/bin/apt -y install pcmanfm openjdk-11-jre-headless openjdk-11-jdk-headless leafpad"))
 node_juliet.startVNC()
 node_juliet.routable_control_ip = True
